@@ -94,3 +94,23 @@ would render as:
 		{{ user.name }}
 	{{/if-}}</div>
 ```
+
+### Special Case
+
+You may want to remove all whitespace between elements without output or comment.
+
+```html
+<ul>
+	{{--}}
+	<li>Inline Nav Item 1</li>
+	{{--}}
+	<li>Inline Nav Item 2</li>
+	{{--}}
+</ul>
+```
+
+would render as:
+
+```html
+<ul><li>Inline Nav Item 1</li><li>Inline Nav Item 2</li></ul>
+```

@@ -29,7 +29,6 @@ var dev = require("can-log/dev/dev");
 // ## Helpers
 
 var mustacheLineBreakRegExp = /(?:(^|\r?\n)(\s*)(\{\{([\s\S]*)\}\}\}?)([^\S\n\r]*)($|\r?\n))|(\{\{([\s\S]*)\}\}\}?)/g,
-	mustacheWhitespaceRegExp = /(\s*)(\{\{\{?)(-?)([\s\S]*?)(-?)(\}\}\}?)(\s*)/g,
 	k = function(){};
 
 
@@ -470,29 +469,7 @@ var core = {
 	 * @return {String}
 	 */
 	cleanWhitespaceControl: function(template) {
-		return template.replace(mustacheWhitespaceRegExp, function(
-			whole,
-			spaceBefore,
-			bracketBefore,
-			controlBefore,
-			expression,
-			controlAfter,
-			bracketAfter,
-			spaceAfter,
-			matchIndex
-		) {
-
-			if (controlBefore === '-') {
-				spaceBefore = '';
-			}
-
-			if (controlAfter === '-') {
-				spaceAfter = '';
-			}
-
-			return spaceBefore + bracketBefore + expression + bracketAfter + spaceAfter;
-
-		});
+		return template.replace(/\s*\{\{--\}\}\s*|\s*(\{\{\{?)-|-(\}\}\}?)\s*/g, "$1$2");
 	},
 	getTemplateById: function(){}
 };
